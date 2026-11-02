@@ -1,0 +1,30 @@
+[Unit]
+Description=probe-api 代理存活探测 API
+Documentation=file:/opt/probe-api/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=probe
+Group=probe
+WorkingDirectory=/opt/probe-api
+EnvironmentFile=/etc/probe-api.env
+# node 不在 /usr/bin/node 时（nvm、手工解压安装），把这里换成 `command -v node` 的结果
+ExecStart=/usr/bin/node /opt/probe-api/src/server.js
+Restart=always
+RestartSec=3
+# 批量探测会同时开大量短连接
+LimitNOFILE=65535
+# 加固：探测只需要出网，不需要写系统目录
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/opt/probe-api
+
+[Install]
+WantedBy=multi-user.target

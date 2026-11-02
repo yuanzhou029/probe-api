@@ -1,0 +1,16 @@
+{
+  "name": "probe-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "VPS 代理存活探测 API（socks5 / http / https / sstp），逻辑移植自根目录 _worker.js（CF-Workers-CheckSocks5）",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node test/integration.mjs",
+    "probe": "node test/probe.mjs"
+  }
+}
