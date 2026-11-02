@@ -12,6 +12,34 @@
 
 判定「存活」的方式不是「端口能连」，而是：经代理建隧道 → 对 `www.iplocate.io` 做真实 TLS 握手 → 请求 `/api/lookup` → 解析出出口 IP 才算活。这样需要认证的代理、能连但无出口的节点不会被误判。
 
+## 快速开始（一键安装到 VPS）
+
+支持 Debian / Ubuntu / CentOS / AlmaLinux / Rocky 等系统。
+
+### 方式一：远程一键安装（推荐）
+
+在你的 Linux VPS 上以 root 用户运行：
+
+```bash
+# 自动检测/安装 Node.js 20、配置 systemd 守护进程并随机生成安全 Token
+curl -fsSL https://raw.githubusercontent.com/yuanzhou029/probe-api/main/deploy/install.sh | sudo bash
+```
+
+自定义端口与 Token：
+```bash
+curl -fsSL https://raw.githubusercontent.com/yuanzhou029/probe-api/main/deploy/install.sh | sudo bash -s -- --port 8888 --token your_token
+```
+
+### 方式二：克隆后一键安装
+
+```bash
+git clone https://github.com/yuanzhou029/probe-api.git
+cd probe-api
+sudo bash deploy/install.sh
+```
+
+---
+
 ## 目录
 
 ```
